@@ -1,28 +1,27 @@
-import requests
-import tkinter as tk
-from bs4 import BeautifulSoup
+import requests # pip install requests
+import tkinter as tk # pip install tkinter
+from bs4 import BeautifulSoup # pip install BeautifulSoup
 
-# Funktion zum Abrufen und Anzeigen der Daten
+# retrieve and show data
 def display_data():
-    # URL dynamisch generieren
+    # dynamic URL
     riot_id = riot_id_entry.get()
     tag = tag_entry.get()
     user = f"{riot_id}%23{tag}"
 
     url = f'https://tracker.gg/valorant/profile/riot/{user}/overview'
 
-    # HTML-Code der Seite abrufen
+    # HTML code of the page
     response = requests.get(url)
     html_content = response.text
-
-    soup = BeautifulSoup(html_content, 'html.parser')  # HTML-Code analysieren
-
-    # Zähler zurücksetzen
+    soup = BeautifulSoup(html_content, 'html.parser')
+    
+    # colour count
     red_count = 0
     yellow_count = 0
     green_count = 0
-
-    # Fehlermeldung
+    
+    # Error message
     error = soup.find('div', class_='content--error')
     if error:
         error_element = error.find('span', class_='lead') # Player not found
@@ -35,10 +34,10 @@ def display_data():
                    
         error_label.config(text=error_message)
 
-        # Spielerdaten zurücksetzen
+        # reset data
         title_label.config(text=f"")
         rank_label.config(text=f"Rank (momentan):\t{rank_placeholder}")
-        peak_rating_label.config(text=f"Peak Rating:\t{peak_rating_placeholder}")
+        peak_rank_label.config(text=f"Peak Rank:\t{peak_rank_placeholder}")
         damage_label.config(text=f"Damage/Round:\t{damage_placeholder}")
         kd_label.config(text=f"K/D Ratio:\t\t{kd_placeholder}")
         headshot_label.config(text=f"Headshot%:\t{headshot_placeholder}")
@@ -47,7 +46,7 @@ def display_data():
         tracker_score_label.config(text=f"Tracker Score:\t{tracker_score_placeholder}")
         color_count_label.config(text=f"")
         
-        # Farben zurücksetzen
+        # reset colours
         damage_label.config(fg="black")
         kd_label.config(fg="black")
         headshot_label.config(fg="black")
@@ -56,7 +55,7 @@ def display_data():
         tracker_score_label.config(fg="black")
         return
 
-    # Name des Spielers (Titel)
+    # Player name (title)
     name_element = soup.find('span', class_='trn-ign__username')
     name = name_element.text.strip()
     title_label.config(text=name)
@@ -66,13 +65,13 @@ def display_data():
     rank = rank_element.text.strip()
     rank_label.config(text=f"Rank (momentan):\t{rank}")
 
-    # Peak Rating
-    peak_rating = soup.find('h3', string='Peak Rating')
-    peak_rating_element = peak_rating.find_next('div', class_='rating-entry')
-    rating_value = peak_rating_element.find('div', class_='value').text.strip()
-    rating = ' '.join(rating_value.split())  # Lücke zwischen "Immortal" und "202RR"
-    episode = peak_rating_element.find('div', class_='subtext').text.strip()
-    peak_rating_label.config(text=f"Peak Rating:\t{rating} / {episode}")
+    # Peak Rank
+    peak_rank = soup.find('h3', string='Peak Rating')
+    peak_rank_element = peak_rank.find_next('div', class_='rating-entry')
+    rank_value = peak_rank_element.find('div', class_='value').text.strip()
+    rank = ' '.join(rank_value.split())  # Gap between "Rank" and "xxRR"
+    episode = peak_rank_element.find('div', class_='subtext').text.strip()
+    peak_rank_label.config(text=f"Peak Rank:\t{rank} / {episode}")
 
     # Damage/Round
     damage_element = soup.select_one('div.numbers:-soup-contains("Damage/Round")')
@@ -158,41 +157,39 @@ def display_data():
         tracker_score_label.config(fg="green")
         green_count += 1
 
-    # Farb-Zähler
-    if green_count >= 2: # gibt nur einen 2er Fall
-        color_count_label.config(text=f"Aussage: \t\tStabil")
+    # Summary (colours)
+    if green_count >= 2: # only one case (2/2/2)
+        color_count_label.config(text=f"Fazit: \t\tStabil")
 
     if red_count >= 3:
-        color_count_label.config(text=f"Aussage: \t\tSchlecht")
+        color_count_label.config(text=f"Fazit: \t\tSchlecht")
     if yellow_count >= 3:
-        color_count_label.config(text=f"Aussage: \t\tDurchschnittlich ")
+        color_count_label.config(text=f"Fazit: \t\tDurchschnittlich ")
     if green_count >= 3:
-        color_count_label.config(text=f"Aussage: \t\tCool.")
+        color_count_label.config(text=f"Fazit: \t\tCool.")
 
     if red_count >= 5:
-        color_count_label.config(text=f"Aussage: \t\tBoosted!")   
+        color_count_label.config(text=f"Fazit: \t\tBoosted!")   
     if yellow_count >= 5:
-        color_count_label.config(text=f"Aussage: \t\tKomplett Average")
+        color_count_label.config(text=f"Fazit: \t\tKomplett Average")
     if green_count >= 5:
-        color_count_label.config(text=f"Aussage: \t\tGöttlich")
+        color_count_label.config(text=f"Fazit: \t\tGöttlich")
 
-    error_label.config(text="")  # Fehlermeldung löschen, falls vorhanden
+    error_label.config(text="")  # reset error message
 
-# UI-Fenster erstellen
+# UI window
 window = tk.Tk()
 window.title("Spielerübersicht ")
+window.configure(bg="#CECEF6") # Background
 
-# Hintergrundfarbe des Fensters
-window.configure(bg="#CECEF6")
-
-# Funktion für Kampfi
+# function Kampfi
 def set_riot_id():
     riot_id_entry.delete(0, tk.END)
     tag_entry.delete(0, tk.END)
     riot_id_entry.insert(0, "Kampfi")
     tag_entry.insert(0, "noo")
 
-# Eingabefelder erstellen und positionieren
+# input fields
 riot_id_label = tk.Label(window, text="Riot ID:", font=("Arial", 14, "bold"), pady=5, bg="#CECEF6")
 riot_id_label.pack()
 riot_id_entry = tk.Entry(window, font=("Arial", 12))
@@ -203,15 +200,15 @@ tag_label.pack()
 tag_entry = tk.Entry(window, font=("Arial", 12))
 tag_entry.pack()
 
-# Button zum Abrufen der Daten
+# Button to retrieve data
 fetch_button = tk.Button(window, text="Daten abrufen", command=display_data, font=("Arial", 12))
 fetch_button.pack(pady=10)
 
-# Kampfi-Button
+# Button Kampfi 
 set_riot_id_button = tk.Button(window, text="Stats Kampfi", command=set_riot_id, font=("Arial", 12))
 set_riot_id_button.pack(pady=10)
 
-# UI-Elemente für Spielerdaten
+# UI elements for player data
 data_frame = tk.Frame(window, bg="#CECEF6")
 data_frame.pack()
 
@@ -221,8 +218,8 @@ title_label.grid(row=0, column=0, columnspan=2)
 rank_label = tk.Label(data_frame, text="", font=("Arial", 14), padx=20, pady=10, bg="#CECEF6")
 rank_label.grid(row=1, column=0, sticky="w")
 
-peak_rating_label = tk.Label(data_frame, text="", font=("Arial", 14), padx=20, pady=10, bg="#CECEF6")
-peak_rating_label.grid(row=2, column=0, sticky="w")
+peak_rank_label = tk.Label(data_frame, text="", font=("Arial", 14), padx=20, pady=10, bg="#CECEF6")
+peak_rank_label.grid(row=2, column=0, sticky="w")
 
 damage_label = tk.Label(data_frame, text="", font=("Arial", 14), padx=20, pady=10, bg="#CECEF6")
 damage_label.grid(row=3, column=0, sticky="w")
@@ -248,13 +245,9 @@ color_count_label.grid(row=9, column=0, sticky="w")
 error_label = tk.Label(window, text="", font=("Arial", 14), bg="#CECEF6", fg="red")
 error_label.pack()
 
-# Eingabefeld für den zusätzlichen Text
-additional_text_label = tk.Label(window, text="Credits gehen raus an Clarala", font=("Arial", 7), pady=5, bg="#CECEF6")
-additional_text_label.pack()
-
-# Platzhalterwerte für Spielerdaten
+# Placeholder
 rank_placeholder = "Rank abc"
-peak_rating_placeholder = "Rank abc / EPISODE x: ACT x"
+peak_rank_placeholder = "Rank abc / EPISODE x: ACT x"
 damage_placeholder = "abc.d"
 kd_placeholder = "a.bc"
 headshot_placeholder = "ab.c%"
@@ -262,9 +255,9 @@ acs_placeholder = "abc.d"
 kad_placeholder = "a.bc"
 tracker_score_placeholder = "abc /1000"
 
-# Platzhalterwerte in den UI-Elementen anzeigen
+# Placeholder (UI-elements)
 rank_label.config(text=f"Rank (momentan):\t{rank_placeholder}")
-peak_rating_label.config(text=f"Peak Rating:\t{peak_rating_placeholder}")
+peak_rank_label.config(text=f"Peak Rank:\t{peak_rank_placeholder}")
 damage_label.config(text=f"Damage/Round:\t{damage_placeholder}")
 kd_label.config(text=f"K/D Ratio:\t\t{kd_placeholder}")
 headshot_label.config(text=f"Headshot%:\t{headshot_placeholder}")
@@ -272,5 +265,9 @@ acs_label.config(text=f"ACS:\t\t{acs_placeholder}")
 kad_label.config(text=f"KAD Ratio:\t{kad_placeholder}")
 tracker_score_label.config(text=f"Tracker Score:\t{tracker_score_placeholder}")
 
-# UI-Fenster starten
+# Credits
+additional_text_label = tk.Label(window, text="Credits gehen raus an Clarala", font=("Arial", 6), pady=5, bg="#CECEF6")
+additional_text_label.pack()
+
+# launch UI window
 window.mainloop()
