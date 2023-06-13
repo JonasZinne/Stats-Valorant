@@ -1,6 +1,6 @@
-import requests # pip install requests
-import tkinter as tk # pip install tkinter
-from bs4 import BeautifulSoup # pip install BeautifulSoup
+import requests
+import tkinter as tk
+from bs4 import BeautifulSoup
 from styles import *
 
 VERSION = 0.9
@@ -182,7 +182,6 @@ def reset_data():
         tracker_score_label.config(text=f"Tracker Score:\tabc /1000")
         color_count_label.config(text=f"")
         
-        # reset colours
         damage_label.config(fg="black")
         kd_label.config(fg="black")
         headshot_label.config(fg="black")
@@ -282,7 +281,7 @@ credits_label.pack()
 
 version_label = tk.Label(window, text=f"Version:\t{VERSION}")
 set_version_label_styles(version_label)
-version_label.pack(pady=5)
+version_label.pack()
 
-# launch UI window
+# UI window launched
 window.mainloop()
