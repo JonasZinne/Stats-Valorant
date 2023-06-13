@@ -8,6 +8,15 @@ VERSION = 0.9
 def fetch_data():
     riot_name = riot_name_entry.get()
     riot_tag = riot_tag_entry.get()
+
+    if not riot_name or not riot_tag:
+        error_label.config(text="Felder nicht ausgefüllt")
+        return
+    
+    if len(riot_name) > 20 or len(riot_tag) > 5:
+        error_label.config(text="maximale Zeichenanzahl überschritten")
+        return
+    
     user = f"{riot_name}%23{riot_tag}"
     url = f'https://tracker.gg/valorant/profile/riot/{user}/overview'
     response = requests.get(url)
