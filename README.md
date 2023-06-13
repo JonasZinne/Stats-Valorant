@@ -7,6 +7,9 @@ Dieses Projekt ist eine Python-Anwendung, die Spielstatistiken von Valorant-Spie
 - Bewertung der Spielerleistung anhand der Farbe der Datenpunkte
 - Benutzerfreundliche grafische Benutzeroberfläche mit Tkinter
 
+## Anwendung starten
+Um die Anwendung auszuführen, lade einfach die `tracker.exe`-Datei aus dem [GitHub-Ordner]([https://github.com/JonasZinne/Stats-Valorant/blob/main/tracker.exe]) herunter.
+
 ## Verbesserungen/Fehler
 
 Wenn du Verbesserungsvorschläge hast oder Fehler gefunden hast, erstelle bitte eine Issue oder sende eine Pull-Anfrage.
