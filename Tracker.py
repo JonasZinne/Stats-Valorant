@@ -2,6 +2,8 @@ import requests # pip install requests
 import tkinter as tk # pip install tkinter
 from bs4 import BeautifulSoup # pip install BeautifulSoup
 
+version = 0.8
+
 # retrieve and show data
 def display_data():
     # dynamic URL
@@ -249,7 +251,7 @@ tracker_score_label.grid(row=8, column=0, sticky="w")
 color_count_label = tk.Label(data_frame, text="", font=("Arial", 14), padx=20, pady=10, bg="#CECEF6")
 color_count_label.grid(row=9, column=0, sticky="w")
 
-error_label = tk.Label(window, text="", font=("Arial", 14), bg="#CECEF6", fg="red")
+error_label = tk.Label(window, text="", font=("Arial", 14), padx=20, pady=10, bg="#CECEF6", fg="red")
 error_label.pack()
 
 # Placeholder
@@ -272,9 +274,11 @@ acs_label.config(text=f"ACS:\t\t{acs_placeholder}")
 kad_label.config(text=f"KAD Ratio:\t{kad_placeholder}")
 tracker_score_label.config(text=f"Tracker Score:\t{tracker_score_placeholder}")
 
-# Credits
-additional_text_label = tk.Label(window, text="Credits gehen raus an Clarala", font=("Arial", 6), pady=5, bg="#CECEF6")
-additional_text_label.pack()
+# Credits and Version
+credits_label = tk.Label(window, text="Credits gehen raus an Clarala", font=("Arial", 9), bg="#CECEF6")
+credits_label.pack()
+version_label = tk.Label(window, text=f"Version:\t{version}", font=("Arial", 8), pady=5, bg="#CECEF6")
+version_label.pack()
 
 # launch UI window
 window.mainloop()
