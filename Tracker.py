@@ -1,6 +1,7 @@
 import requests # pip install requests
 import tkinter as tk # pip install tkinter
 from bs4 import BeautifulSoup # pip install BeautifulSoup
+from styles import *
 
 VERSION = 0.9
 
@@ -197,72 +198,91 @@ def kampfi_riot_id():
 
 # UI window
 window = tk.Tk()
-window.title("Spielerübersicht ")
-window.configure(bg="#CECEF6") # Background
+set_window_styles(window)
 
 # input fields
-riot_name_label = tk.Label(window, text="Riot Name:", font=("Arial", 14, "bold"), pady=5, bg="#CECEF6")
+riot_name_label = tk.Label(window, text="Riot Name:")
+set_label_styles(riot_name_label)
 riot_name_label.pack()
-riot_name_entry = tk.Entry(window, font=("Arial", 12))
+riot_name_entry = tk.Entry(window)
+set_entry_styles(riot_name_entry)
 riot_name_entry.pack()
 
-riot_tag_label = tk.Label(window, text="Riot Tag (ohne #):", font=("Arial", 14, "bold"), pady=5, bg="#CECEF6")
+riot_tag_label = tk.Label(window, text="Riot Tag (ohne #):")
+set_label_styles(riot_tag_label)
 riot_tag_label.pack()
-riot_tag_entry = tk.Entry(window, font=("Arial", 12))
+riot_tag_entry = tk.Entry(window)
+set_entry_styles(riot_tag_entry)
 riot_tag_entry.pack()
 
 # Button to retrieve data
-fetch_button = tk.Button(window, text="Daten abrufen", command=fetch_data, font=("Arial", 12))
+fetch_button = tk.Button(window, text="Daten abrufen", command=fetch_data)
+set_button_styles(fetch_button)
 fetch_button.pack(pady=10)
 
 # Button Kampfi 
-kampfi_riot_id_button = tk.Button(window, text="Stats Kampfi", command=kampfi_riot_id, font=("Arial", 12))
+kampfi_riot_id_button = tk.Button(window, text="Stats Kampfi", command=kampfi_riot_id)
+set_button_styles(kampfi_riot_id_button)
 kampfi_riot_id_button.pack(pady=10)
 
 # UI elements for player data
 data_frame = tk.Frame(window, bg="#CECEF6")
 data_frame.pack()
 
-title_label = tk.Label(data_frame, text="", font=("Arial", 24, "bold"), pady=20, bg="#CECEF6")
+title_label = tk.Label(data_frame, text="")
+set_title_label_styles(title_label)
 title_label.grid(row=0, column=0, columnspan=2)
 
-rank_label = tk.Label(data_frame, text="", font=("Arial", 14), padx=20, pady=10, bg="#CECEF6")
+rank_label = tk.Label(data_frame, text="")
+set_data_label_styles(rank_label)
 rank_label.grid(row=1, column=0, sticky="w")
 
-peak_rank_label = tk.Label(data_frame, text="", font=("Arial", 14), padx=20, pady=10, bg="#CECEF6")
+peak_rank_label = tk.Label(data_frame, text="")
+set_data_label_styles(peak_rank_label)
 peak_rank_label.grid(row=2, column=0, sticky="w")
 
-damage_label = tk.Label(data_frame, text="", font=("Arial", 14), padx=20, pady=10, bg="#CECEF6")
+damage_label = tk.Label(data_frame, text="")
+set_data_label_styles(damage_label)
 damage_label.grid(row=3, column=0, sticky="w")
 
-kd_label = tk.Label(data_frame, text="", font=("Arial", 14), padx=20, pady=10, bg="#CECEF6")
+kd_label = tk.Label(data_frame, text="")
+set_data_label_styles(kd_label)
 kd_label.grid(row=4, column=0, sticky="w")
 
-headshot_label = tk.Label(data_frame, text="", font=("Arial", 14), padx=20, pady=10, bg="#CECEF6")
+headshot_label = tk.Label(data_frame, text="")
+set_data_label_styles(headshot_label)
 headshot_label.grid(row=5, column=0, sticky="w")
 
-acs_label = tk.Label(data_frame, text="", font=("Arial", 14), padx=20, pady=10, bg="#CECEF6")
+acs_label = tk.Label(data_frame, text="")
+set_data_label_styles(acs_label)
 acs_label.grid(row=6, column=0, sticky="w")
 
-kad_label = tk.Label(data_frame, text="", font=("Arial", 14), padx=20, pady=10, bg="#CECEF6")
+kad_label = tk.Label(data_frame, text="")
+set_data_label_styles(kad_label)
 kad_label.grid(row=7, column=0, sticky="w")
 
-tracker_score_label = tk.Label(data_frame, text="", font=("Arial", 14), padx=20, pady=10, bg="#CECEF6")
+tracker_score_label = tk.Label(data_frame, text="")
+set_data_label_styles(tracker_score_label)
 tracker_score_label.grid(row=8, column=0, sticky="w")
 
-color_count_label = tk.Label(data_frame, text="", font=("Arial", 14), padx=20, pady=10, bg="#CECEF6")
+color_count_label = tk.Label(data_frame, text="")
+set_data_label_styles(color_count_label)
 color_count_label.grid(row=9, column=0, sticky="w")
 
-error_label = tk.Label(window, text="", font=("Arial", 18, "bold"), padx=20, pady=10, bg="#CECEF6", fg="red")
+error_label = tk.Label(window, text="")
+set_error_label_styles(error_label)
 error_label.pack()
 
 reset_data()
 
 # Credits and Version
-credits_label = tk.Label(window, text="Credits gehen raus an Clarala", font=("Arial", 9), bg="#CECEF6")
+credits_label = tk.Label(window, text="Credits gehen raus an Clarala")
+set_credits_label_styles(credits_label)
 credits_label.pack()
-version_label = tk.Label(window, text=f"Version:\t{VERSION}", font=("Arial", 8), pady=5, bg="#CECEF6")
-version_label.pack()
+
+version_label = tk.Label(window, text=f"Version:\t{VERSION}")
+set_version_label_styles(version_label)
+version_label.pack(pady=5)
 
 # launch UI window
 window.mainloop()
