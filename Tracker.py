@@ -2,28 +2,24 @@ import requests # pip install requests
 import tkinter as tk # pip install tkinter
 from bs4 import BeautifulSoup # pip install BeautifulSoup
 
-version = 0.8
+VERSION = 0.9
 
-# retrieve and show data
-def display_data():
-    # dynamic URL
-    riot_id = riot_id_entry.get()
-    tag = tag_entry.get()
-    user = f"{riot_id}%23{tag}"
-
+def fetch_data():
+    riot_name = riot_name_entry.get()
+    riot_tag = riot_tag_entry.get()
+    user = f"{riot_name}%23{riot_tag}"
     url = f'https://tracker.gg/valorant/profile/riot/{user}/overview'
-
-    # HTML code of the page
     response = requests.get(url)
     html_content = response.text
     soup = BeautifulSoup(html_content, 'html.parser')
+
+    if check_for_errors(soup):
+        reset_data()
+        return
     
-    # colour count
-    red_count = 0
-    yellow_count = 0
-    green_count = 0
-    
-    # Error message
+    display_player_data(soup)
+
+def check_for_errors(soup):
     error = soup.find('div', class_='content--error')
     if error:
         error_element = error.find('span', class_='lead') # Player not found
@@ -35,27 +31,14 @@ def display_data():
             error_message = error.find('span', class_='font-light').text.strip()
                    
         error_label.config(text=error_message)
+        return True
+    
+    return False
 
-        # reset data
-        title_label.config(text=f"")
-        rank_label.config(text=f"Rank (momentan):\t{rank_placeholder}")
-        peak_rank_label.config(text=f"Peak Rank:\t{peak_rank_placeholder}")
-        damage_label.config(text=f"Damage/Round:\t{damage_placeholder}")
-        kd_label.config(text=f"K/D Ratio:\t\t{kd_placeholder}")
-        headshot_label.config(text=f"Headshot%:\t{headshot_placeholder}")
-        acs_label.config(text=f"ACS:\t\t{acs_placeholder}")
-        kad_label.config(text=f"KAD Ratio:\t{kad_placeholder}")
-        tracker_score_label.config(text=f"Tracker Score:\t{tracker_score_placeholder}")
-        color_count_label.config(text=f"")
-        
-        # reset colours
-        damage_label.config(fg="black")
-        kd_label.config(fg="black")
-        headshot_label.config(fg="black")
-        acs_label.config(fg="black")
-        kad_label.config(fg="black")
-        tracker_score_label.config(fg="black")
-        return
+def display_player_data(soup):
+    red_count = 0
+    yellow_count = 0
+    green_count = 0
 
     # Player name (title)
     name_element = soup.find('span', class_='trn-ign__username')
@@ -186,36 +169,55 @@ def display_data():
 
     error_label.config(text="")  # reset error message
 
+def reset_data():
+        title_label.config(text=f"")
+        rank_label.config(text=f"Rank (momentan):\tRank abc")
+        peak_rank_label.config(text=f"Peak Rank:\tRank abc / EPISODE x: ACT x")
+        damage_label.config(text=f"Damage/Round:\tabc.d")
+        kd_label.config(text=f"K/D Ratio:\t\ta.bc")
+        headshot_label.config(text=f"Headshot%:\tab.c%")
+        acs_label.config(text=f"ACS:\t\tabc.d")
+        kad_label.config(text=f"KAD Ratio:\ta.bc")
+        tracker_score_label.config(text=f"Tracker Score:\tabc /1000")
+        color_count_label.config(text=f"")
+        
+        # reset colours
+        damage_label.config(fg="black")
+        kd_label.config(fg="black")
+        headshot_label.config(fg="black")
+        acs_label.config(fg="black")
+        kad_label.config(fg="black")
+        tracker_score_label.config(fg="black")
+
+def kampfi_riot_id():
+    riot_name_entry.delete(0, tk.END)
+    riot_tag_entry.delete(0, tk.END)
+    riot_name_entry.insert(0, "Kampfi")
+    riot_tag_entry.insert(0, "noo")
+
 # UI window
 window = tk.Tk()
 window.title("Spielerübersicht ")
 window.configure(bg="#CECEF6") # Background
 
-# function Kampfi
-def set_riot_id():
-    riot_id_entry.delete(0, tk.END)
-    tag_entry.delete(0, tk.END)
-    riot_id_entry.insert(0, "Kampfi")
-    tag_entry.insert(0, "noo")
-
 # input fields
-riot_id_label = tk.Label(window, text="Riot ID:", font=("Arial", 14, "bold"), pady=5, bg="#CECEF6")
-riot_id_label.pack()
-riot_id_entry = tk.Entry(window, font=("Arial", 12))
-riot_id_entry.pack()
+riot_name_label = tk.Label(window, text="Riot Name:", font=("Arial", 14, "bold"), pady=5, bg="#CECEF6")
+riot_name_label.pack()
+riot_name_entry = tk.Entry(window, font=("Arial", 12))
+riot_name_entry.pack()
 
-tag_label = tk.Label(window, text="Tag (ohne #):", font=("Arial", 14, "bold"), pady=5, bg="#CECEF6")
-tag_label.pack()
-tag_entry = tk.Entry(window, font=("Arial", 12))
-tag_entry.pack()
+riot_tag_label = tk.Label(window, text="Riot Tag (ohne #):", font=("Arial", 14, "bold"), pady=5, bg="#CECEF6")
+riot_tag_label.pack()
+riot_tag_entry = tk.Entry(window, font=("Arial", 12))
+riot_tag_entry.pack()
 
 # Button to retrieve data
-fetch_button = tk.Button(window, text="Daten abrufen", command=display_data, font=("Arial", 12))
+fetch_button = tk.Button(window, text="Daten abrufen", command=fetch_data, font=("Arial", 12))
 fetch_button.pack(pady=10)
 
 # Button Kampfi 
-set_riot_id_button = tk.Button(window, text="Stats Kampfi", command=set_riot_id, font=("Arial", 12))
-set_riot_id_button.pack(pady=10)
+kampfi_riot_id_button = tk.Button(window, text="Stats Kampfi", command=kampfi_riot_id, font=("Arial", 12))
+kampfi_riot_id_button.pack(pady=10)
 
 # UI elements for player data
 data_frame = tk.Frame(window, bg="#CECEF6")
@@ -251,33 +253,15 @@ tracker_score_label.grid(row=8, column=0, sticky="w")
 color_count_label = tk.Label(data_frame, text="", font=("Arial", 14), padx=20, pady=10, bg="#CECEF6")
 color_count_label.grid(row=9, column=0, sticky="w")
 
-error_label = tk.Label(window, text="", font=("Arial", 14), padx=20, pady=10, bg="#CECEF6", fg="red")
+error_label = tk.Label(window, text="", font=("Arial", 18, "bold"), padx=20, pady=10, bg="#CECEF6", fg="red")
 error_label.pack()
 
-# Placeholder
-rank_placeholder = "Rank abc"
-peak_rank_placeholder = "Rank abc / EPISODE x: ACT x"
-damage_placeholder = "abc.d"
-kd_placeholder = "a.bc"
-headshot_placeholder = "ab.c%"
-acs_placeholder = "abc.d"
-kad_placeholder = "a.bc"
-tracker_score_placeholder = "abc /1000"
-
-# Placeholder (UI-elements)
-rank_label.config(text=f"Rank (momentan):\t{rank_placeholder}")
-peak_rank_label.config(text=f"Peak Rank:\t{peak_rank_placeholder}")
-damage_label.config(text=f"Damage/Round:\t{damage_placeholder}")
-kd_label.config(text=f"K/D Ratio:\t\t{kd_placeholder}")
-headshot_label.config(text=f"Headshot%:\t{headshot_placeholder}")
-acs_label.config(text=f"ACS:\t\t{acs_placeholder}")
-kad_label.config(text=f"KAD Ratio:\t{kad_placeholder}")
-tracker_score_label.config(text=f"Tracker Score:\t{tracker_score_placeholder}")
+reset_data()
 
 # Credits and Version
 credits_label = tk.Label(window, text="Credits gehen raus an Clarala", font=("Arial", 9), bg="#CECEF6")
 credits_label.pack()
-version_label = tk.Label(window, text=f"Version:\t{version}", font=("Arial", 8), pady=5, bg="#CECEF6")
+version_label = tk.Label(window, text=f"Version:\t{VERSION}", font=("Arial", 8), pady=5, bg="#CECEF6")
 version_label.pack()
 
 # launch UI window
