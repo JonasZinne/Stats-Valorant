@@ -22,18 +22,35 @@ def display_data():
     yellow_count = 0
     green_count = 0
 
-    # Überprüfen, ob ein Fehler vorliegt
-    error_element = soup.find('div', class_='content--error')
-    if error_element:
-        error_message = error_element.find('span', class_='lead').text.strip()
+    # Fehlermeldung
+    error = soup.find('div', class_='content--error')
+    if error:
+        error_element = error.find('span', class_='lead') # Player not found
+        if error_element:
+            error_message = error.find('span', class_='lead').text.strip()
+            
+        error_element = error.find('span', class_='font-light') # Profile private
+        if error_element: 
+            error_message = error.find('span', class_='font-light').text.strip()
+                   
         error_label.config(text=error_message)
+
+        # Spielerdaten zurücksetzen
+        rank_label.config(text=f"Rank (momentan):\t{rank_placeholder}")
+        peak_rating_label.config(text=f"Peak Rating:\t{peak_rating_placeholder}")
+        damage_label.config(text=f"Damage/Round:\t{damage_placeholder}")
+        kd_label.config(text=f"K/D Ratio:\t\t{kd_placeholder}")
+        headshot_label.config(text=f"Headshot%:\t{headshot_placeholder}")
+        acs_label.config(text=f"ACS:\t\t{acs_placeholder}")
+        kad_label.config(text=f"KAD Ratio:\t{kad_placeholder}")
+        tracker_score_label.config(text=f"Tracker Score:\t{tracker_score_placeholder}")
+        color_count_label.config(text=f"")
         return
 
     # Name des Spielers (Titel)
     name_element = soup.find('span', class_='trn-ign__username')
     name = name_element.text.strip()
     title_label.config(text=name)
-    error_label.config(text="")  # Fehlermeldung löschen, falls vorhanden
 
     # Rank
     rank_element = soup.find('div', class_='valorant-rank-bg')
