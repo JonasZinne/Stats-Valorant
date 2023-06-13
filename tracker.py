@@ -3,7 +3,7 @@ import tkinter as tk
 from bs4 import BeautifulSoup
 from styles import *
 
-VERSION = 0.9
+VERSION = 1.0
 
 def fetch_data():
     riot_name = riot_name_entry.get()
@@ -57,8 +57,14 @@ def display_player_data(soup):
 
     # Rank
     rank_element = soup.find('div', class_='valorant-rank-bg')
-    rank = rank_element.text.strip()
-    rank_label.config(text=f"Rank (momentan):\t{rank}")
+    if rank_element:
+        rank = rank_element.text.strip()
+        rank_label.config(text=f"Rank (momentan):\t{rank}")
+    else:
+        error_message = soup.find('span', class_='font-light').text.strip()
+        error_label.config(text=error_message)
+        reset_data()
+        return
 
     # Peak Rank
     peak_rank = soup.find('h3', string='Peak Rating')
