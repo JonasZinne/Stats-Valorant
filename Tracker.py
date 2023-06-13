@@ -164,16 +164,23 @@ def display_data():
     if red_count >= 3:
         color_count_label.config(text=f"Fazit: \t\tSchlecht")
     if yellow_count >= 3:
-        color_count_label.config(text=f"Fazit: \t\tDurchschnittlich ")
+        color_count_label.config(text=f"Fazit: \t\tDurchschnittlich")
     if green_count >= 3:
-        color_count_label.config(text=f"Fazit: \t\tCool.")
+        color_count_label.config(text=f"Fazit: \t\tGut")
 
     if red_count >= 5:
-        color_count_label.config(text=f"Fazit: \t\tBoosted!")   
+        color_count_label.config(text=f"Fazit: \t\tBoosted")   
     if yellow_count >= 5:
         color_count_label.config(text=f"Fazit: \t\tKomplett Average")
     if green_count >= 5:
-        color_count_label.config(text=f"Fazit: \t\tGöttlich")
+        color_count_label.config(text=f"Fazit: \t\tStark")
+        
+    if red_count >= 6:
+        color_count_label.config(text=f"Fazit: \t\tAbsolut Boosted")   
+    if yellow_count >= 6:
+        color_count_label.config(text=f"Fazit: \t\tAbsolutes Mittelmaß")
+    if green_count >= 6:
+        color_count_label.config(text=f"Fazit: \t\tGöttlich") 
 
     error_label.config(text="")  # reset error message
 
