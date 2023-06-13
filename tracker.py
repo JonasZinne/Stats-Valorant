@@ -11,10 +11,12 @@ def fetch_data():
 
     if not riot_name or not riot_tag:
         error_label.config(text="Felder nicht ausgefüllt")
+        reset_data()
         return
     
     if len(riot_name) > 20 or len(riot_tag) > 5:
         error_label.config(text="maximale Zeichenanzahl überschritten")
+        reset_data()
         return
     
     user = f"{riot_name}%23{riot_tag}"
