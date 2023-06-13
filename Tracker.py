@@ -36,6 +36,7 @@ def display_data():
         error_label.config(text=error_message)
 
         # Spielerdaten zurücksetzen
+        title_label.config(text=f"")
         rank_label.config(text=f"Rank (momentan):\t{rank_placeholder}")
         peak_rating_label.config(text=f"Peak Rating:\t{peak_rating_placeholder}")
         damage_label.config(text=f"Damage/Round:\t{damage_placeholder}")
@@ -45,6 +46,14 @@ def display_data():
         kad_label.config(text=f"KAD Ratio:\t{kad_placeholder}")
         tracker_score_label.config(text=f"Tracker Score:\t{tracker_score_placeholder}")
         color_count_label.config(text=f"")
+        
+        # Farben zurücksetzen
+        damage_label.config(fg="black")
+        kd_label.config(fg="black")
+        headshot_label.config(fg="black")
+        acs_label.config(fg="black")
+        kad_label.config(fg="black")
+        tracker_score_label.config(fg="black")
         return
 
     # Name des Spielers (Titel)
@@ -171,7 +180,7 @@ def display_data():
 
 # UI-Fenster erstellen
 window = tk.Tk()
-window.title("Übersicht Spieler")
+window.title("Spielerübersicht ")
 
 # Hintergrundfarbe des Fensters
 window.configure(bg="#CECEF6")
