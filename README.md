@@ -10,7 +10,7 @@ Dieses Projekt ist eine Python-Anwendung, die Spielstatistiken von Valorant-Spie
 - Benutzerfreundliche grafische Benutzeroberfläche mit Tkinter
 
 ## Anwendung starten
-Um die Anwendung auszuführen, lade einfach die `tracker.exe`-Datei aus dem [GitHub-Ordner](https://github.com/JonasZinne/Stats-Valorant/blob/main/tracker.exe) herunter.
+Um die Anwendung auszuführen, lade einfach die `tracker.exe`-Datei aus dem [GitHub-Ordner](https://github.com/JonasZinne/Stats-Valorant/tree/main/.exe) herunter.
 
 ## Verbesserungen/Fehler
 
