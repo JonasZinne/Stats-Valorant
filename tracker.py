@@ -3,7 +3,7 @@ import tkinter as tk
 from bs4 import BeautifulSoup
 from styles import *
 
-VERSION = 1.0
+VERSION = 1.01
 
 def fetch_data():
     riot_name = riot_name_entry.get()
@@ -15,7 +15,7 @@ def fetch_data():
         return
     
     if len(riot_name) > 20 or len(riot_tag) > 5:
-        error_label.config(text="maximale Zeichenanzahl überschritten")
+        error_label.config(text="zu viele Zeichen eingegeben")
         reset_data()
         return
     
