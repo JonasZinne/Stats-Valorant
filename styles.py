@@ -1,5 +1,5 @@
 def set_window_styles(window):
-    window.title("Spielerübersicht")
+    window.title("Stats Valorant")
     window.configure(bg="#CECEF6")
 
 def set_label_styles(label):
