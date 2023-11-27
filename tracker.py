@@ -3,7 +3,7 @@ import tkinter as tk
 from bs4 import BeautifulSoup
 from styles import *
 
-VERSION = 1.01
+VERSION = 1.02
 
 def fetch_data():
     riot_name = riot_name_entry.get()
@@ -105,7 +105,7 @@ def display_player_data(soup):
         green_count += 1
 
     # Headshot%
-    headshot_element = soup.select_one('div.numbers:-soup-contains("Headshot%")')
+    headshot_element = soup.select_one('div.numbers:-soup-contains("Headshot %")')
     headshot = headshot_element.find_next('span', class_='value').text.strip()
     headshot_label.config(text=f"Headshot%:\t{headshot}")
     if float(headshot.strip('%')) <= 20:
@@ -210,7 +210,7 @@ def kampfi_riot_id():
     riot_name_entry.delete(0, tk.END)
     riot_tag_entry.delete(0, tk.END)
     riot_name_entry.insert(0, "Kampfi")
-    riot_tag_entry.insert(0, "noo")
+    riot_tag_entry.insert(0, "Fire")
 
 # UI window
 window = tk.Tk()
