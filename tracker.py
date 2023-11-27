@@ -3,7 +3,7 @@ import tkinter as tk
 from bs4 import BeautifulSoup
 from styles import *
 
-VERSION = 1.03
+VERSION = 1.04
 
 def fetch_data():
     riot_name = riot_name_entry.get()
@@ -104,10 +104,10 @@ def display_player_data(soup):
         kd_label.config(fg="green")
         green_count += 1
 
-    # Headshot%
+    # Headshot %
     headshot_element = soup.select_one('div.numbers:-soup-contains("Headshot %")')
     headshot = headshot_element.find_next('span', class_='value').text.strip()
-    headshot_label.config(text=f"Headshot%:\t{headshot}")
+    headshot_label.config(text=f"Headshot %:\t{headshot}")
     if float(headshot.strip('%')) <= 20:
         headshot_label.config(fg="red")
         red_count += 1
@@ -193,7 +193,7 @@ def reset_data():
         peak_rank_label.config(text=f"Peak Rank:\tRank abc / EPISODE x: ACT x")
         damage_label.config(text=f"Damage/Round:\tabc.d")
         kd_label.config(text=f"K/D Ratio:\t\ta.bc")
-        headshot_label.config(text=f"Headshot%:\tab.c%")
+        headshot_label.config(text=f"Headshot %:\tab.c%")
         acs_label.config(text=f"ACS:\t\tabc.d")
         kad_label.config(text=f"KAD Ratio:\ta.bc")
         tracker_score_label.config(text=f"Tracker Score:\tabc /1000")
