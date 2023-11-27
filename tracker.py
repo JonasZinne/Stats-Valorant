@@ -3,7 +3,7 @@ import tkinter as tk
 from bs4 import BeautifulSoup
 from styles import *
 
-VERSION = 1.02
+VERSION = 1.03
 
 def fetch_data():
     riot_name = riot_name_entry.get()
@@ -20,7 +20,7 @@ def fetch_data():
         return
     
     user = f"{riot_name}%23{riot_tag}"
-    url = f'https://tracker.gg/valorant/profile/riot/{user}/overview'
+    url = f'https://tracker.gg/valorant/profile/riot/{user}/overview?playlist=competitive'
     response = requests.get(url)
     html_content = response.text
     soup = BeautifulSoup(html_content, 'html.parser')
