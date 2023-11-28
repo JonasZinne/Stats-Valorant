@@ -3,7 +3,7 @@ import tkinter as tk
 from bs4 import BeautifulSoup
 from styles import *
 
-VERSION = 1.05
+VERSION = 1.06
 
 def fetch_data(event=None):
     riot_name = riot_name_entry.get()
@@ -11,11 +11,13 @@ def fetch_data(event=None):
 
     if not riot_name or not riot_tag:
         error_label.config(text="Felder nicht ausgefüllt")
+        title_label.config(text=f"")
         reset_data()
         return
     
     if len(riot_name) > 20 or len(riot_tag) > 5:
         error_label.config(text="zu viele Zeichen eingegeben")
+        title_label.config(text=f"")
         reset_data()
         return
     
@@ -26,6 +28,7 @@ def fetch_data(event=None):
     soup = BeautifulSoup(html_content, 'html.parser')
 
     if check_for_errors(soup):
+        title_label.config(text=f"")
         reset_data()
         return
     
@@ -188,7 +191,6 @@ def display_player_data(soup):
     error_label.config(text="")  # reset error message
 
 def reset_data():
-        title_label.config(text=f"")
         rank_label.config(text=f"Rank (momentan):\tRank abc")
         peak_rank_label.config(text=f"Peak Rank:\tRank abc / EPISODE x: ACT x")
         damage_label.config(text=f"Damage/Round:\tabc.d")
