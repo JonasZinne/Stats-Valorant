@@ -44,7 +44,6 @@ def check_for_errors(soup, labels):
                    
         labels['error_label'].config(text=error_message)
         return True
-    
     return False
 
 def display_player_data(soup, labels):
