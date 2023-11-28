@@ -3,9 +3,9 @@ import tkinter as tk
 from bs4 import BeautifulSoup
 from styles import *
 
-VERSION = 1.04
+VERSION = 1.05
 
-def fetch_data():
+def fetch_data(event=None):
     riot_name = riot_name_entry.get()
     riot_tag = riot_tag_entry.get()
 
@@ -235,6 +235,8 @@ riot_tag_entry.pack()
 fetch_button = tk.Button(window, text="Daten abrufen", command=fetch_data)
 set_button_styles(fetch_button)
 fetch_button.pack(pady=10)
+
+window.bind('<Return>', fetch_data)
 
 # Button Kampfi 
 kampfi_riot_id_button = tk.Button(window, text="Stats Kampfi", command=kampfi_riot_id)
