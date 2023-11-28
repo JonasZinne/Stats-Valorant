@@ -2,7 +2,7 @@ import tkinter as tk
 from functions import *
 from styles import *
 
-VERSION = 1.12
+VERSION = 1.21
 
 # UI window
 window = tk.Tk()
@@ -11,14 +11,14 @@ set_window_styles(window)
 # input fields
 riot_name_label = tk.Label(window, text="Riot Name:")
 set_label_styles(riot_name_label)
-riot_name_label.pack()
+riot_name_label.pack(pady=(10,5))
 riot_name_entry = tk.Entry(window)
 set_entry_styles(riot_name_entry)
 riot_name_entry.pack()
 
 riot_tag_label = tk.Label(window, text="Riot Tag:")
 set_label_styles(riot_tag_label)
-riot_tag_label.pack()
+riot_tag_label.pack(pady=(10,5))
 riot_tag_entry = tk.Entry(window)
 set_entry_styles(riot_tag_entry)
 riot_tag_entry.pack()
@@ -31,14 +31,14 @@ entries = {
 # Button to retrieve data
 fetch_button = tk.Button(window, text="Daten abrufen", command=lambda: fetch_data(labels, entries))
 set_button_styles(fetch_button)
-fetch_button.pack(pady=10)
+fetch_button.pack(pady=(20,0))
 
 window.bind('<Return>', lambda event: fetch_data(labels, entries))
 
 # Button Kampfi 
 kampfi_riot_id_button = tk.Button(window, text="Stats Kampfi", command=lambda: kampfi_riot_id(entries))
 set_button_styles(kampfi_riot_id_button)
-kampfi_riot_id_button.pack(pady=10)
+kampfi_riot_id_button.pack(pady=(10,20))
 
 # UI elements for player data
 data_frame = tk.Frame(window, bg="#483D8B")
