@@ -2,7 +2,7 @@ import tkinter as tk
 from functions import *
 from styles import *
 
-VERSION = 1.11
+VERSION = 1.12
 
 # UI window
 window = tk.Tk()
@@ -16,7 +16,7 @@ riot_name_entry = tk.Entry(window)
 set_entry_styles(riot_name_entry)
 riot_name_entry.pack()
 
-riot_tag_label = tk.Label(window, text="Riot Tag (ohne #):")
+riot_tag_label = tk.Label(window, text="Riot Tag:")
 set_label_styles(riot_tag_label)
 riot_tag_label.pack()
 riot_tag_entry = tk.Entry(window)
