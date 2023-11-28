@@ -1,0 +1,4 @@
+Version 1.2:
+- Bugfixes
+- Daten abrufen mit "Enter" möglich
+- Design überarbeitet
