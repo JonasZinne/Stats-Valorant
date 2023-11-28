@@ -2,7 +2,7 @@ import tkinter as tk
 from functions import *
 from styles import *
 
-VERSION = 1.10
+VERSION = 1.11
 
 # UI window
 window = tk.Tk()
@@ -41,7 +41,7 @@ set_button_styles(kampfi_riot_id_button)
 kampfi_riot_id_button.pack(pady=10)
 
 # UI elements for player data
-data_frame = tk.Frame(window, bg="#CECEF6")
+data_frame = tk.Frame(window, bg="#483D8B")
 data_frame.pack()
 
 labels = {
