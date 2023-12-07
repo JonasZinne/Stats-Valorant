@@ -1,7 +1,7 @@
 def set_window_styles(window):
     window.title("Stats Valorant")
     window.configure(bg="#483D8B")
-    window.geometry("550x825")
+    window.geometry("525x825")
 
 def set_label_styles(label):
     label.config(
@@ -36,7 +36,7 @@ def set_data_label_styles(label):
     label.config(
         font=("Arial", 14), 
         bg="#483D8B",
-        padx=20, 
+        padx=35, 
         pady=10
     )
 
