@@ -3,7 +3,7 @@ from tkinter import ttk
 from functions import *
 from styles import *
 
-VERSION = 1.26
+VERSION = 1.27
 BACKGROUND = "#483D8B"
 
 # UI window
