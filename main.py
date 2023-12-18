@@ -1,9 +1,8 @@
 import tkinter as tk
-from tkinter import ttk
 from functions import *
 from styles import *
 
-VERSION = 1.27
+VERSION = 1.28
 BACKGROUND = "#483D8B"
 
 # UI window
@@ -12,7 +11,7 @@ set_window_styles(window)
 
 # Create canvas and scrollbar
 canvas = tk.Canvas(window)
-scrollbar = ttk.Scrollbar(window, orient="vertical", command=canvas.yview)
+scrollbar = tk.Scrollbar(window, orient="vertical", command=canvas.yview)
 scrollable_frame = tk.Frame(canvas, bg=BACKGROUND)
 
 scrollable_frame.bind(
@@ -63,7 +62,7 @@ kampfi_riot_id_button.pack(pady=(10,20))
 
 # UI elements for player data
 data_frame = tk.Frame(scrollable_frame, bg=BACKGROUND)
-data_frame.pack()
+data_frame.pack(padx=(0,70))
 
 labels = {
     "title_label": tk.Label(data_frame, text=""),
@@ -84,7 +83,7 @@ for label in labels.values():
 
 set_title_label_styles(labels["title_label"])
 
-labels["title_label"].grid(row=0, column=0, columnspan=2)
+labels["title_label"].grid(row=0, column=0, columnspan=2, sticky="w")
 labels["rank_label"].grid(row=1, column=0, sticky="w")
 labels["peak_rank_label"].grid(row=2, column=0, sticky="w")
 labels["damage_label"].grid(row=3, column=0, sticky="w")
