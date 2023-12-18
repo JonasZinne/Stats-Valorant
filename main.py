@@ -2,7 +2,7 @@ import tkinter as tk
 from functions import *
 from styles import *
 
-VERSION = 1.28
+VERSION = 1.29
 BACKGROUND = "#483D8B"
 
 # UI window
@@ -62,7 +62,7 @@ kampfi_riot_id_button.pack(pady=(10,20))
 
 # UI elements for player data
 data_frame = tk.Frame(scrollable_frame, bg=BACKGROUND)
-data_frame.pack(padx=(0,70))
+data_frame.pack(padx=(0,75))
 
 labels = {
     "title_label": tk.Label(data_frame, text=""),
