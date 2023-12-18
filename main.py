@@ -2,7 +2,7 @@ import tkinter as tk
 from functions import *
 from styles import *
 
-VERSION = 1.31
+VERSION = 1.33
 BACKGROUND = "#483D8B"
 
 # UI window
@@ -28,37 +28,42 @@ def _on_mousewheel(event):
     canvas.yview_scroll(int(-1*(event.delta/120)), "units")
 scrollable_frame.bind_all("<MouseWheel>", _on_mousewheel)
 
-# input fields
-riot_name_label = tk.Label(scrollable_frame, text="Riot Name:")
-set_label_styles(riot_name_label)
-riot_name_label.pack(pady=(10,5))
-riot_name_entry = tk.Entry(scrollable_frame)
-set_entry_styles(riot_name_entry)
-riot_name_entry.pack()
+# Top Frame (Input fields and Buttons)
+top_frame = tk.Frame(scrollable_frame, bg=BACKGROUND)
+top_frame.pack(side="top", fill="x")
 
-riot_tag_label = tk.Label(scrollable_frame, text="Riot Tag:")
+top_frame.columnconfigure(0, weight=1)
+top_frame.columnconfigure(1, weight=1)
+
+# Input Fields
+riot_name_label = tk.Label(top_frame, text="Riot Name:")
+set_label_styles(riot_name_label)
+riot_name_label.grid(row=0, column=0, sticky="e", pady=10, padx=10)
+riot_name_entry = tk.Entry(top_frame)
+set_entry_styles(riot_name_entry)
+riot_name_entry.grid(row=0, column=1, sticky="w")
+
+riot_tag_label = tk.Label(top_frame, text="Riot Tag:")
 set_label_styles(riot_tag_label)
-riot_tag_label.pack(pady=(10,5))
-riot_tag_entry = tk.Entry(scrollable_frame)
+riot_tag_label.grid(row=1, column=0, sticky="e", pady=10, padx=10)
+riot_tag_entry = tk.Entry(top_frame)
 set_entry_styles(riot_tag_entry)
-riot_tag_entry.pack()
+riot_tag_entry.grid(row=1, column=1, sticky="w")
 
 entries = {
     "riot_name_entry": riot_name_entry,
     "riot_tag_entry": riot_tag_entry
 }
 
-# Button to retrieve data
-fetch_button = tk.Button(scrollable_frame, text="Daten abrufen", command=lambda: fetch_data(labels, entries))
+# Buttons (retrieve data)
+fetch_button = tk.Button(top_frame, text="Daten abrufen", command=lambda: fetch_data(labels, entries))
 set_button_styles(fetch_button)
-fetch_button.pack(pady=(20,0))
-
+fetch_button.grid(row=2, column=0, columnspan=2, pady=(10,5))
 window.bind('<Return>', lambda event: fetch_data(labels, entries))
 
-# Button Kampfi 
-kampfi_riot_id_button = tk.Button(scrollable_frame, text="Stats Kampfi", command=lambda: kampfi_riot_id(entries))
+kampfi_riot_id_button = tk.Button(top_frame, text="Stats Kampfi", command=lambda: kampfi_riot_id(entries))
 set_button_styles(kampfi_riot_id_button)
-kampfi_riot_id_button.pack(pady=(10,20))
+kampfi_riot_id_button.grid(row=3, column=0, columnspan=2, pady=(5,10))
 
 # UI elements for player data
 data_frame = tk.Frame(scrollable_frame, bg=BACKGROUND)
@@ -99,14 +104,19 @@ labels["error_label"].pack()
 
 reset_data(labels)
 
-# Credits and Version
-credits_label = tk.Label(scrollable_frame, text="Credits gehen raus an Clarala")
-set_credits_label_styles(credits_label)
-credits_label.pack()
+# Bottom Frame (Credits and Version)
+bottom_frame = tk.Frame(scrollable_frame, bg=BACKGROUND)
+bottom_frame.pack(side="bottom", fill="x")
 
-version_label = tk.Label(scrollable_frame, text=f"Version:\t{VERSION}")
+bottom_frame.columnconfigure(0, weight=1)
+
+credits_label = tk.Label(bottom_frame, text="Credits gehen raus an Clarala")
+set_credits_label_styles(credits_label)
+credits_label.grid(row=0, column=0, sticky="ew")
+
+version_label = tk.Label(bottom_frame, text=f"Version:\t{VERSION}")
 set_version_label_styles(version_label)
-version_label.pack()
+version_label.grid(row=1, column=0, sticky="ew")
 
 # Pack the canvas and scrollbar
 canvas.pack(side="left", fill="both", expand=True)
