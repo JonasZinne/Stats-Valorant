@@ -2,7 +2,7 @@ import tkinter as tk
 from functions import *
 from styles import *
 
-VERSION = 1.29
+VERSION = 1.31
 BACKGROUND = "#483D8B"
 
 # UI window
@@ -83,7 +83,7 @@ for label in labels.values():
 
 set_title_label_styles(labels["title_label"])
 
-labels["title_label"].grid(row=0, column=0, columnspan=2, sticky="w")
+labels["title_label"].grid(row=0, column=0, sticky="w")
 labels["rank_label"].grid(row=1, column=0, sticky="w")
 labels["peak_rank_label"].grid(row=2, column=0, sticky="w")
 labels["damage_label"].grid(row=3, column=0, sticky="w")

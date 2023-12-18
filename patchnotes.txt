@@ -1,4 +1,10 @@
-Version 1.2:
+Version 1.1:
 - Bugfixes
 - Daten abrufen mit "Enter" möglich
+
+Version 1.2:
 - Design überarbeitet
+
+Version 1.3:
+- Scrollbar hinzugefügt
+- Bugfixes Design
