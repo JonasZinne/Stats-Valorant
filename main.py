@@ -2,7 +2,7 @@ import tkinter as tk
 from functions import *
 from styles import *
 
-VERSION = 1.33
+VERSION = 1.41
 BACKGROUND = "#483D8B"
 
 # UI window
@@ -109,10 +109,15 @@ bottom_frame = tk.Frame(scrollable_frame, bg=BACKGROUND)
 bottom_frame.pack(side="bottom", fill="x")
 
 bottom_frame.columnconfigure(0, weight=1)
+bottom_frame.columnconfigure(1, weight=1)
 
 credits_label = tk.Label(bottom_frame, text="Credits gehen raus an Clarala")
 set_credits_label_styles(credits_label)
 credits_label.grid(row=0, column=0, sticky="ew")
+
+toggle_site_button = tk.Button(bottom_frame, text="Seite wechseln", command=lambda: toggle_site())
+set_button_styles(toggle_site_button)
+toggle_site_button.grid(row=0, column=1, padx=20)
 
 version_label = tk.Label(bottom_frame, text=f"Version:\t{VERSION}")
 set_version_label_styles(version_label)

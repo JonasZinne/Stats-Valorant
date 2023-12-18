@@ -1,7 +1,7 @@
 def set_window_styles(window):
     window.title("Stats Valorant")
     window.configure(bg="#483D8B")
-    window.geometry("600x771")
+    window.geometry("600x782")
 
 def set_label_styles(label):
     label.config(

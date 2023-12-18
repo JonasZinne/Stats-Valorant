@@ -8,3 +8,7 @@ Version 1.2:
 Version 1.3:
 - Scrollbar hinzugefügt
 - Bugfixes Design
+
+Version 1.4:
+- Verbesserung Design
+- Button "Seite wechseln" hinzugefügt

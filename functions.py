@@ -186,6 +186,9 @@ def display_player_data(soup, labels):
 
     labels['error_label'].config(text="")  # reset error message
 
+def toggle_site():
+    return
+
 def reset_data(labels):
     labels['rank_label'].config(text=f"Rank (momentan):\tRank abc")
     labels['peak_rank_label'].config(text=f"Peak Rank:\tRank abc / EPISODE x: ACT x")
