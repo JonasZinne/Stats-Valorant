@@ -2,7 +2,7 @@ import tkinter as tk
 from functions import *
 from styles import *
 
-VERSION = 1.42
+VERSION = 1.41
 BACKGROUND = "#483D8B"
 
 # UI window
@@ -71,7 +71,6 @@ data_frame.pack(padx=(0,75))
 
 labels = {
     "title_label": tk.Label(data_frame, text=""),
-
     "rank_label": tk.Label(data_frame, text=""),
     "peak_rank_label": tk.Label(data_frame, text=""),
     "damage_label": tk.Label(data_frame, text=""),
@@ -81,15 +80,15 @@ labels = {
     "kad_label": tk.Label(data_frame, text=""),
     "tracker_score_label": tk.Label(data_frame, text=""),
     "color_count_label": tk.Label(data_frame, text=""),
-
     "error_label": tk.Label(scrollable_frame, text="")
 }
 
-set_title_label_styles(labels["title_label"])
-labels["title_label"].grid(row=0, column=0, sticky="w")
-
 for label in labels.values():
     set_data_label_styles(label)
+
+set_title_label_styles(labels["title_label"])
+
+labels["title_label"].grid(row=0, column=0, sticky="w")
 labels["rank_label"].grid(row=1, column=0, sticky="w")
 labels["peak_rank_label"].grid(row=2, column=0, sticky="w")
 labels["damage_label"].grid(row=3, column=0, sticky="w")
